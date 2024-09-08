@@ -3,6 +3,8 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@material-tailwind/react";
+import { TableHeader } from "./components/TableHeader";
+import { Pagination } from "./components/Pagination";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -24,9 +26,11 @@ export default function RootLayout({
     <ThemeProvider>
       <html lang="en">
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          {children}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased flex-row`}
+          >
+          <TableHeader></TableHeader>
+            {children}
+          <Pagination></Pagination>
         </body>
       </html>
     </ThemeProvider>

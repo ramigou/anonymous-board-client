@@ -2,6 +2,7 @@
 
 import { Avatar, Button, Card, CardBody, CardFooter, CardHeader, Chip, IconButton, Input, Tooltip, Typography } from "@material-tailwind/react";
 import { Pagination } from "./components/Pagination";
+import {TableHeader} from "./components/TableHeader";
 
 const TABLE_HEAD = ["Transaction", "Amount", "Date", "Status", "Account", ""];
  
@@ -199,7 +200,6 @@ export default function Home() {
             )}
           </tbody>
         </table>
-        <Pagination></Pagination>
         </>
   );
 }
