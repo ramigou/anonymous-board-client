@@ -1,101 +1,205 @@
-import Image from "next/image";
+'use client';
+
+import { Avatar, Button, Card, CardBody, CardFooter, CardHeader, Chip, IconButton, Input, Tooltip, Typography } from "@material-tailwind/react";
+import { Pagination } from "./components/Pagination";
+
+const TABLE_HEAD = ["Transaction", "Amount", "Date", "Status", "Account", ""];
+ 
+const TABLE_ROWS = [
+  {
+    img: "https://docs.material-tailwind.com/img/logos/logo-spotify.svg",
+    name: "Spotify",
+    amount: "$2,500",
+    date: "Wed 3:00pm",
+    status: "paid",
+    account: "visa",
+    accountNumber: "1234",
+    expiry: "06/2026",
+  },
+  {
+    img: "https://docs.material-tailwind.com/img/logos/logo-amazon.svg",
+    name: "Amazon",
+    amount: "$5,000",
+    date: "Wed 1:00pm",
+    status: "paid",
+    account: "master-card",
+    accountNumber: "1234",
+    expiry: "06/2026",
+  },
+  {
+    img: "https://docs.material-tailwind.com/img/logos/logo-pinterest.svg",
+    name: "Pinterest",
+    amount: "$3,400",
+    date: "Mon 7:40pm",
+    status: "pending",
+    account: "master-card",
+    accountNumber: "1234",
+    expiry: "06/2026",
+  },
+  {
+    img: "https://docs.material-tailwind.com/img/logos/logo-google.svg",
+    name: "Google",
+    amount: "$1,000",
+    date: "Wed 5:00pm",
+    status: "paid",
+    account: "visa",
+    accountNumber: "1234",
+    expiry: "06/2026",
+  },
+  {
+    img: "https://docs.material-tailwind.com/img/logos/logo-netflix.svg",
+    name: "netflix",
+    amount: "$14,000",
+    date: "Wed 3:30am",
+    status: "cancelled",
+    account: "visa",
+    accountNumber: "1234",
+    expiry: "06/2026",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    <>
+        <table className="w-full min-w-max table-auto text-left">
+          <thead>
+            <tr>
+              {TABLE_HEAD.map((head) => (
+                <th
+                  key={head}
+                  className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4"
+                >
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-normal leading-none opacity-70"
+                  >
+                    {head}
+                  </Typography>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {TABLE_ROWS.map(
+              (
+                {
+                  img,
+                  name,
+                  amount,
+                  date,
+                  status,
+                  account,
+                  accountNumber,
+                  expiry,
+                },
+                index,
+              ) => {
+                const isLast = index === TABLE_ROWS.length - 1;
+                const classes = isLast
+                  ? "p-4"
+                  : "p-4 border-b border-blue-gray-50";
+ 
+                return (
+                  <tr key={name}>
+                    <td className={classes}>
+                      <div className="flex items-center gap-3">
+                        <Avatar
+                          src={img}
+                          alt={name}
+                          size="md"
+                          className="border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
+                        />
+                        <Typography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-bold"
+                        >
+                          {name}
+                        </Typography>
+                      </div>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {amount}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {date}
+                      </Typography>
+                    </td>
+                    <td className={classes}>
+                      <div className="w-max">
+                        <Chip
+                          size="sm"
+                          variant="ghost"
+                          value={status}
+                          color={
+                            status === "paid"
+                              ? "green"
+                              : status === "pending"
+                              ? "amber"
+                              : "red"
+                          }
+                        />
+                      </div>
+                    </td>
+                    <td className={classes}>
+                      <div className="flex items-center gap-3">
+                        <div className="h-9 w-12 rounded-md border border-blue-gray-50 p-1">
+                          <Avatar
+                            src={
+                              account === "visa"
+                                ? "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/logos/visa.png"
+                                : "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/logos/mastercard.png"
+                            }
+                            size="sm"
+                            alt={account}
+                            variant="square"
+                            className="h-full w-full object-contain p-1"
+                          />
+                        </div>
+                        <div className="flex flex-col">
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal capitalize"
+                          >
+                            {account.split("-").join(" ")} {accountNumber}
+                          </Typography>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal opacity-70"
+                          >
+                            {expiry}
+                          </Typography>
+                        </div>
+                      </div>
+                    </td>
+                    <td className={classes}>
+                      <Tooltip content="Edit User">
+                        <IconButton variant="text">
+                        
+                        </IconButton>
+                      </Tooltip>
+                    </td>
+                  </tr>
+                );
+              },
+            )}
+          </tbody>
+        </table>
+        <Pagination></Pagination>
+        </>
   );
 }
